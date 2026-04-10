@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  --glass-blur: blur(24px);
+  --text-main: #111111;
+  --text-muted: #666666;
+  --bg-gradient: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+  --accent: #222222;
+  --accent-hover: #000000;
+  --button-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: rgba(20, 20, 20, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    --glass-blur: blur(28px);
+    --text-main: #eeeeee;
+    --text-muted: #999999;
+    --bg-gradient: linear-gradient(135deg, #181818 0%, #202020 100%);
+    --accent: #eeeeee;
+    --accent-hover: #ffffff;
+    --button-text: #000000;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  margin: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background blob effects - grayscale */
+body::before, body::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(100px);
+  opacity: 0.6;
+}
+
+body::before {
+  width: 50vw;
+  height: 50vw;
+  background: #cccccc;
+  top: -10vw;
+  left: -10vw;
+  animation: float 14s ease-in-out infinite alternate;
+}
+
+body::after {
+  width: 60vw;
+  height: 60vw;
+  background: #a8a8a8;
+  bottom: -20vw;
+  right: -10vw;
+  animation: float 18s ease-in-out infinite alternate-reverse;
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before { background: #333333; }
+  body::after { background: #444444; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(50px) scale(1.1); }
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+/* Base UI Elements */
+input, textarea, select, button {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: var(--accent);
+  color: var(--button-text);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.input-glass {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+.input-glass:focus {
+  border-color: var(--text-main);
+  box-shadow: 0 0 0 1px var(--text-main);
+  background: rgba(255, 255, 255, 0.7);
+}
+@media (prefers-color-scheme: dark) {
+  .input-glass {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .input-glass:focus {
+    box-shadow: 0 0 0 1px var(--text-main);
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
