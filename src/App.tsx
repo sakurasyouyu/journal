@@ -1,48 +1,62 @@
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { EntryForm } from './components/EntryForm';
 import { EntryList } from './components/EntryList';
 import { useJournalEntries } from './hooks/useJournalEntries';
 import { CustomCursor } from './components/CustomCursor';
+import { Navigation } from './components/Navigation';
+import { Arena } from './components/Arena';
 
-function App() {
+function DiaryHome() {
   const { entries, addEntry, deleteEntry } = useJournalEntries();
 
   return (
-    <>
+    <main style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+      gap: '40px',
+      alignItems: 'start'
+    }}>
+      <section>
+        <EntryForm onAdd={addEntry} />
+      </section>
+      
+      <section style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <h2 style={{ fontSize: '1.4rem', paddingLeft: '12px', fontWeight: 600 }}>あなたの記録</h2>
+        <EntryList entries={entries} onDelete={deleteEntry} />
+      </section>
+    </main>
+  );
+}
+
+function App() {
+  return (
+    <Router>
       <CustomCursor />
       <div style={{ 
-      maxWidth: '1000px', 
-      margin: '0 auto', 
-      padding: '40px 20px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '40px'
-    }}>
-      <header className="glass-panel" style={{ textAlign: 'center', padding: '32px 20px' }}>
-        <h1 style={{ fontSize: '2.4rem', marginBottom: '12px', letterSpacing: '-0.5px', fontWeight: 300 }}>
-          Serenity Journal
-        </h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto', lineHeight: '1.5' }}>
-          シンプルで清楚なUIで、日々の生活の質（QoL）とメンタルヘルスを育む記録を。
-        </p>
-      </header>
-
-      <main style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-        gap: '40px',
-        alignItems: 'start'
+        maxWidth: '1000px', 
+        margin: '0 auto', 
+        padding: '40px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '40px'
       }}>
-        <section>
-          <EntryForm onAdd={addEntry} />
-        </section>
-        
-        <section style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <h2 style={{ fontSize: '1.4rem', paddingLeft: '12px', fontWeight: 600 }}>あなたの記録</h2>
-          <EntryList entries={entries} onDelete={deleteEntry} />
-        </section>
-      </main>
-    </div>
-    </>
+        <header className="glass-panel" style={{ textAlign: 'center', padding: '32px 20px' }}>
+          <h1 style={{ fontSize: '2.4rem', marginBottom: '12px', letterSpacing: '-0.5px', fontWeight: 300 }}>
+            Serenity Journal
+          </h1>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto', lineHeight: '1.5' }}>
+            清楚なUIで、日々の記録をRPG育成のように楽しもう。
+          </p>
+        </header>
+
+        <Navigation />
+
+        <Routes>
+          <Route path="/" element={<DiaryHome />} />
+          <Route path="/arena" element={<Arena />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
