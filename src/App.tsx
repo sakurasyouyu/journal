@@ -19,7 +19,7 @@ function App() {
           Serenity Journal
         </h1>
         <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto', lineHeight: '1.5' }}>
-          Apple Glass調のプレミアムUIで、日々の生活の質（QoL）とメンタルヘルスを育む記録を。
+          シンプルで清楚なUIで、日々の生活の質（QoL）とメンタルヘルスを育む記録を。
         </p>
       </header>
 
