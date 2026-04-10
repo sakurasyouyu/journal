@@ -1,12 +1,15 @@
 import { EntryForm } from './components/EntryForm';
 import { EntryList } from './components/EntryList';
 import { useJournalEntries } from './hooks/useJournalEntries';
+import { CustomCursor } from './components/CustomCursor';
 
 function App() {
   const { entries, addEntry, deleteEntry } = useJournalEntries();
 
   return (
-    <div style={{ 
+    <>
+      <CustomCursor />
+      <div style={{ 
       maxWidth: '1000px', 
       margin: '0 auto', 
       padding: '40px 20px',
@@ -39,6 +42,7 @@ function App() {
         </section>
       </main>
     </div>
+    </>
   );
 }
 
